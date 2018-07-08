@@ -81,7 +81,7 @@ void question::get_answer()
             cout<<"(Time_Limit: 180 seconds):";
             check_time=start_time+180000;
         }
-        else
+        else 
         {
             cout<<"(Time_Limit: 60 seconds):";
         	check_time=start_time+60000;
@@ -103,6 +103,7 @@ void question::get_answer()
 	   	user_ans=getche();
     }
     user_ans=toupper(user_ans);
+    cnt++;
 }
 
 void question::check_answer()
