@@ -36,7 +36,7 @@
 			if(isset($_POST['getdata']))
 			{
 				$rollno1 = $_POST['rollno1'];
-				$sql1 = "SELECT * FROM info WHERE rollno='$rollno1'";
+				$sql1 = "SELECT * FROM info WHERE rollno='$rollno1';";
 				$rec1=mysqli_query($conn,$sql1);
 				$result = mysqli_fetch_assoc($rec1);
 				echo '<form action="" method="post">';
@@ -102,51 +102,67 @@
 					echo '<hr color="#2EC487" size="10">';
 					echo '<h2 align="center">Events</h2>';
 					echo '<table align="center" cellpadding="1" cellspacing="1" border="0%">';
-
+					$sql1 = "SELECT * FROM e_info WHERE rollno='$rollno1';";
+					$rec1=mysqli_query($conn,$sql1);
+					$result = mysqli_fetch_assoc($rec1);
 					echo '<tr align="left">';
 						echo '<td>Lan Gaming</td>';
 						echo '<td class="main">	';	
-							echo '<input type="radio" name="lan" value="yes">yes';
-							echo '<input type="radio" name="lan" value="no" checked>no';
-							echo '&nbsp;&nbsp;<input type="text" name="lanid" value="lg">';
+							echo '<input type="radio" name="lan" value="yes"';if ('yes' == $result['lan']) echo ' checked';
+							echo '>yes';
+							echo '<input type="radio" name="lan" value="no"';if ('yes' != $result['lan']) echo ' checked';
+							echo '>no';
+							echo '&nbsp;&nbsp;<input type="text" name="lanid" value="';if ('yes' == $result['lan']){echo $result['lanid'];} else {echo 'lg';}
+							echo '">';
 						echo '</td>';
 						echo '<td>';
 							echo 'Poster Presentation';
 						echo '</td>';
 						echo '<td class="main">';
-							echo '<input type="radio" name="poster" value="yes">yes';
-							echo '<input type="radio" name="poster" value="no" checked>no';
-							echo '&nbsp;&nbsp;<input type="text" name="posterid" value="pp">';
+							echo '<input type="radio" name="poster" value="yes"';if ('yes' == $result['poster']) echo ' checked';
+							echo '>yes';
+							echo '<input type="radio" name="poster" value="no"';if ('yes' != $result['poster']) echo ' checked';
+							echo '>no';
+							echo '&nbsp;&nbsp;<input type="text" name="posterid" value="';if ('yes' == $result['poster']){echo $result['posterid'];} else {echo 'pp';}
+							echo '">';
 						echo '</td>';
 					echo '</tr>';
 					echo '<tr align="left">';
 						echo '<td>CodeJam</td>';
 						echo '<td class="main">';
-							echo '<input type="radio" name="codejam" value="yes">yes';
-							echo '<input type="radio" name="codejam" value="no" checked>no';
+							echo '<input type="radio" name="codejam" value="yes"';if ('yes' == $result['codejam']) echo ' checked';
+							echo '>yes';
+							echo '<input type="radio" name="codejam" value="no"';if ('yes' != $result['codejam']) echo ' checked';
+							echo '>no';
 						echo '</td>';
 						echo '<td>Web Craft</td>';
 						echo '<td class="main">';
-							echo '<input type="radio" name="web" value="yes">yes';
-							echo '<input type="radio" name="web" value="no" checked>no';
+							echo '<input type="radio" name="web" value="yes"';if ('yes' == $result['web']) echo ' checked';
+							echo '>yes';
+							echo '<input type="radio" name="web" value="no"';if ('yes' != $result['web']) echo ' checked';
+							echo '>no';
 						echo '</td>';
 					echo '</tr>';
 					echo '<tr align="left">';
 						echo '<td>Picasso</td>';
 						echo '<td class="main">';
-							echo '<input type="radio" name="picasso" value="yes">yes';
-							echo '<input type="radio" name="picasso" value="no" checked>no';
+							echo '<input type="radio" name="picasso" value="yes"';if ('yes' == $result['picasso']) echo ' checked';
+							echo '>yes';
+							echo '<input type="radio" name="picasso" value="no"';if ('yes' != $result['picasso']) echo ' checked';
+							echo '>no';
 						echo '</td>';
 						echo '<td>One Minute Video</td>';
 						echo '<td class="main">';
-							echo '<input type="radio" name="video" value="yes">yes';
-							echo '<input type="radio" name="video" value="no" checked>no';
+							echo '<input type="radio" name="video" value="yes"';if ('yes' == $result['video']) echo ' checked';
+							echo '>yes';
+							echo '<input type="radio" name="video" value="no"';if ('yes' != $result['video']) echo ' checked';
+							echo '>no';
 						echo '</td>';
 					echo '</tr>';
 				echo '</table>';
 				echo '<br>';
 				echo '<input type="submit" name="submit" value="Submit">&nbsp;&nbsp;';
-				echo '<input type="button" name="update" value="Update">&nbsp;&nbsp;';
+				echo '<input type="submit" name="update" value="Update">&nbsp;&nbsp;';
 				echo '<input type="reset" name="reset" value="Reset">';
 				}
 	?>
@@ -172,6 +188,24 @@
 
 				if ($conn->multi_query($sql) === TRUE) {
     				echo "New records created successfully";
+				} else {
+    				echo "Error: " . $sql . "<br>" . $conn->error;
+				}
+			}
+	if(isset($_POST['update'])){
+				$rollno = $_POST['rollno'];
+				$lan=$_POST['lan'];
+				$lanid=$_POST['lanid'];
+				$poster=$_POST['poster'];
+				$posterid=$_POST['posterid'];
+				$codejam=$_POST['codejam'];
+				$web=$_POST['web'];
+				$picasso=$_POST['picasso'];
+				$video=$_POST['video'];
+
+				$sql= "UPDATE `e_info` SET `rollno`='$rollno',`lan`='$lan',`lanid`='$lanid',`poster`='$poster',`posterid`='$posterid',`codejam`='$codejam',`web`='$web',`picasso`='$picasso',`video`='$video' WHERE rollno='$rollno'";
+				if ($conn->multi_query($sql) === TRUE) {
+    				echo "Records updated successfully";
 				} else {
     				echo "Error: " . $sql . "<br>" . $conn->error;
 				}
