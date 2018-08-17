@@ -24,6 +24,7 @@
 
 <body>
 <h1>Welcome to Technothon!!!</h1>
+
 <form action="" method="post">
 <table align="center">
 	<tr>
