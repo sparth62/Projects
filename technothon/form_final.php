@@ -160,6 +160,15 @@
 							echo '>no';
 						echo '</td>';
 					echo '</tr>';
+					echo '<tr align="left">';
+						echo '<td>Chal beta Selfie...</td>';
+						echo '<td class="main">';
+							echo '<input type="radio" name="selfie" value="yes"';if ('yes' == $result['selfie']) echo ' checked';
+							echo '>yes';
+							echo '<input type="radio" name="selfie" value="no"';if ('yes' != $result['selfie']) echo ' checked';
+							echo '>no';
+						echo '</td>';
+					echo '</tr>';
 				echo '</table>';
 				echo '<br>';
 				echo '<input type="submit" name="submit" value="Submit">&nbsp;&nbsp;';
@@ -184,8 +193,8 @@
 				$web=$_POST['web'];
 				$picasso=$_POST['picasso'];
 				$video=$_POST['video'];
-
-				$sql .= "INSERT INTO `e_info`(`rollno`, `lan`, `lanid`, `poster`, `posterid`, `codejam`, `web`, `picasso`, `video`) VALUES ('$rollno','$lan','$lanid','$poster','$posterid','$codejam','$web','$picasso','$video')";
+				$selfie=$_POST['selfie'];
+				$sql .= "INSERT INTO `e_info`(`rollno`, `lan`, `lanid`, `poster`, `posterid`, `codejam`, `web`, `picasso`, `video`,`selfie`) VALUES ('$rollno','$lan','$lanid','$poster','$posterid','$codejam','$web','$picasso','$video','$selfie')";
 
 				if ($conn->multi_query($sql) === TRUE) {
     				echo "New records created successfully";
@@ -203,8 +212,9 @@
 				$web=$_POST['web'];
 				$picasso=$_POST['picasso'];
 				$video=$_POST['video'];
+				$selfie=$_POST['selfie'];
 
-				$sql= "UPDATE `e_info` SET `rollno`='$rollno',`lan`='$lan',`lanid`='$lanid',`poster`='$poster',`posterid`='$posterid',`codejam`='$codejam',`web`='$web',`picasso`='$picasso',`video`='$video' WHERE rollno='$rollno'";
+				$sql= "UPDATE `e_info` SET `rollno`='$rollno',`lan`='$lan',`lanid`='$lanid',`poster`='$poster',`posterid`='$posterid',`codejam`='$codejam',`web`='$web',`picasso`='$picasso',`video`='$video',`selfie`='$selfie' WHERE rollno='$rollno'";
 				if ($conn->multi_query($sql) === TRUE) {
     				echo "Records updated successfully";
 				} else {
