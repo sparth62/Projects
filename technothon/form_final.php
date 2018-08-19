@@ -15,6 +15,7 @@
 	}
 	
 ?>
+
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="project.css">
@@ -37,7 +38,7 @@
 			if(isset($_POST['getdata']))
 			{
 				$rollno1 = $_POST['rollno1'];
-				$sql1 = "SELECT * FROM info WHERE rollno='$rollno1';";
+				$sql1 = "SELECT * FROM s_info WHERE rollno='$rollno1';";
 				$rec1=mysqli_query($conn,$sql1);
 				$result = mysqli_fetch_assoc($rec1);
 				echo '<form action="" method="post">';
@@ -150,14 +151,23 @@
 							echo '<input type="radio" name="picasso" value="yes"';if ('yes' == $result['picasso']) echo ' checked';
 							echo '>yes';
 							echo '<input type="radio" name="picasso" value="no"';if ('yes' != $result['picasso']) echo ' checked';
-							echo '>no';
+							echo '>no&nbsp;&nbsp;&nbsp;';
+							echo '<input type="radio" name="picasso2" value="laptop"';if ('pc' != $result['picasso2']) echo ' checked';
+							echo '>Laptop';
+							echo '<input type="radio" name="picasso2" value="pc"';if ('pc' == $result['picasso2']) echo ' checked';
+							echo '>PC';
+							echo '&nbsp;&nbsp;<input type="text" name="picassoid" value="';if ('yes' == $result['picasso']){echo $result['picassoid'];} else {echo 'pic';}
+							echo '">';
 						echo '</td>';
+
 						echo '<td>One Minute Video</td>';
 						echo '<td class="main">';
 							echo '<input type="radio" name="video" value="yes"';if ('yes' == $result['video']) echo ' checked';
 							echo '>yes';
 							echo '<input type="radio" name="video" value="no"';if ('yes' != $result['video']) echo ' checked';
 							echo '>no';
+							echo '&nbsp;&nbsp;<input type="text" name="videoid" value="';if ('yes' == $result['video']){echo $result['videoid'];} else {echo 'v';}
+							echo '">';
 						echo '</td>';
 					echo '</tr>';
 					echo '<tr align="left">';
@@ -171,39 +181,49 @@
 					echo '</tr>';
 				echo '</table>';
 				echo '<br>';
-				echo '<input type="submit" name="submit" value="Submit">&nbsp;&nbsp;';
+				//echo '<input type="submit" name="submit" value="Submit">&nbsp;&nbsp;';
 				echo '<input type="submit" name="update" value="Update">&nbsp;&nbsp;';
 				echo '<input type="reset" name="reset" value="Reset">';
 				}
 	?>
+	
 <?php
-	if(isset($_POST['submit'])){
+	/*if(isset($_POST['submit'])){
 				$rollno = $_POST['rollno'];
 				$name = $_POST['sname'];
 				$branch = $_POST['branch'];
 				$sem = $_POST['sem'];
 				$email = $_POST['email'];
 				$contact = $_POST['contact'];
-				$sql = "INSERT INTO `s_info`(`rollno`, `name`, `branch`, `sem`, `email`, `contact`) VALUES ('$rollno','$name','$branch',$sem,'$email','$contact');";
-				$lan=$_POST['lan'];
 				$lanid=$_POST['lanid'];
+				//$sql = "INSERT INTO `s_info`(`rollno`, `name`, `branch`, `sem`, `email`, `contact`) VALUES ('$rollno','$name','$branch',$sem,'$email','$contact');";
+				$lan=$_POST['lan'];
+				
+				
 				$poster=$_POST['poster'];
 				$posterid=$_POST['posterid'];
 				$codejam=$_POST['codejam'];
 				$web=$_POST['web'];
 				$picasso=$_POST['picasso'];
+				$picasso2=$_POST['picasso2'];
+				$picassoid=$_POST['picassoid'];
 				$video=$_POST['video'];
+				$videoid=$_POST['videoid'];
 				$selfie=$_POST['selfie'];
-				$sql .= "INSERT INTO `e_info`(`rollno`, `lan`, `lanid`, `poster`, `posterid`, `codejam`, `web`, `picasso`, `video`,`selfie`) VALUES ('$rollno','$lan','$lanid','$poster','$posterid','$codejam','$web','$picasso','$video','$selfie')";
+				$sql= "INSERT INTO `e_info`(`rollno`, `lan`, `lanid`, `poster`, `posterid`, `codejam`, `web`, `picasso`, `picasso2`, `picassoid`, `video`,`videoid`,`selfie`) VALUES ('$rollno','$lan','$lanid','$poster','$posterid','$codejam','$web','$picasso','$picasso2','$picassoid','$video','$videoid','$selfie')";
 
 				if ($conn->multi_query($sql) === TRUE) {
     				echo "New records created successfully";
-				} else {
-    				echo "Error: " . $sql . "<br>" . $conn->error;
-				}
+				
 			}
+		}*/
 	if(isset($_POST['update'])){
 				$rollno = $_POST['rollno'];
+				$name = $_POST['sname'];
+				$branch = $_POST['branch'];
+				$sem = $_POST['sem'];
+				$email = $_POST['email'];
+				$contact = $_POST['contact'];
 				$lan=$_POST['lan'];
 				$lanid=$_POST['lanid'];
 				$poster=$_POST['poster'];
@@ -211,16 +231,119 @@
 				$codejam=$_POST['codejam'];
 				$web=$_POST['web'];
 				$picasso=$_POST['picasso'];
+				$picasso2=$_POST['picasso2'];
+				$picassoid=$_POST['picassoid'];
 				$video=$_POST['video'];
+				$videoid=$_POST['videoid'];
 				$selfie=$_POST['selfie'];
 
-				$sql= "UPDATE `e_info` SET `rollno`='$rollno',`lan`='$lan',`lanid`='$lanid',`poster`='$poster',`posterid`='$posterid',`codejam`='$codejam',`web`='$web',`picasso`='$picasso',`video`='$video',`selfie`='$selfie' WHERE rollno='$rollno'";
+				$sql0 ="SELECT COUNT(*) FROM e_info WHERE rollno='$rollno';";
+					$rec1=mysqli_query($conn,$sql0);
+					$row = mysqli_fetch_row($rec1);
+					$count = $row[0];
+				if($count==0)
+				{
+					$sql="INSERT INTO `e_info`(`rollno`, `lan`, `lanid`, `poster`, `posterid`, `codejam`, `web`, `picasso`, `picasso2`, `picassoid`, `video`, `videoid`, `selfie`) VALUES ('$rollno','no','lg','no','pp','no','no','no','laptop','pic','no','v','no');";	
+				}
+				else
+				{
+					$sql="";
+				}
+
+				/*$sql="UPDATE `s_info` SET `rollno`='$rollno',`name`='$name',`branch`='$branch',`sem`='$sem',`email`='$email',`contact`='$contact' WHERE rollno='$rollno';";*/
+
+				if($lan=='yes')
+				{
+					$sql1 ="SELECT COUNT(*) FROM e_info WHERE lanid='$lanid';";
+					$rec1=mysqli_query($conn,$sql1);
+					$row = mysqli_fetch_row($rec1);
+					$lgcount = $row[0];
+					
+					if($lgcount>2)
+					{	
+    					echo "<script type='text/javascript'>alert('Lan gaming team already have 3 participents');</script>";
+					}
+					else
+					{
+						$sql .="UPDATE `e_info` SET `lan`='$lan',`lanid`='$lanid' WHERE rollno='$rollno';";
+					}
+				}
+
+				if($poster=='yes')
+				{
+					$sql1 ="SELECT COUNT(*) FROM e_info WHERE posterid='$posterid';";
+					$rec1=mysqli_query($conn,$sql1);
+					$row = mysqli_fetch_row($rec1);
+					$ppcount = $row[0];
+					
+					if($ppcount>1)
+					{	
+    					echo "<script type='text/javascript'>alert('Poster Presentation team already have 2 participents');</script>";
+					}
+					else
+					{
+						$sql .="UPDATE `e_info` SET `poster`='$poster',`posterid`='$posterid' WHERE rollno='$rollno';";
+					}
+				}
+
+				if($picasso=='yes')
+				{
+					$sql1 ="SELECT COUNT(*) FROM e_info WHERE picassoid='$picassoid';";
+					$rec1=mysqli_query($conn,$sql1);
+					$row = mysqli_fetch_row($rec1);
+					$piccount = $row[0];
+					
+					if($piccount>1)
+					{	
+    					echo "<script type='text/javascript'>alert('Picasso team already have 2 participents');</script>";
+					}
+					else
+					{
+						$sql .="UPDATE `e_info` SET `picasso`='$picasso',`picassoid`='$picassoid',`picasso2`='$picasso2' WHERE rollno='$rollno';";
+					}
+				}
+
+				if($video=='yes')
+				{
+					$sql1 ="SELECT COUNT(*) FROM e_info WHERE videoid='$videoid';";
+					$rec1=mysqli_query($conn,$sql1);
+					$row = mysqli_fetch_row($rec1);
+					$vcount = $row[0];
+					
+					if($vcount>1)
+					{	
+    					echo "<script type='text/javascript'>alert('One minute video team already have 2 participents');</script>";
+					}
+					else
+					{
+						$sql .="UPDATE `e_info` SET `video`='$video',`videoid`='$videoid' WHERE rollno='$rollno';";
+					}
+				}
+
+				if($codejam=='yes')
+				{
+					$sql .="UPDATE `e_info` SET `codejam`='$codejam' WHERE rollno='$rollno';";
+				}
+
+				if($web=='yes')
+				{
+					$sql .="UPDATE `e_info` SET `web`='$web' WHERE rollno='$rollno';";
+				}
+
+				if($selfie=='yes')
+				{
+					$sql .="UPDATE `e_info` SET `selfie`='$selfie' WHERE rollno='$rollno';";
+				}
+
+				/*$sql .= "UPDATE `e_info` SET `lan`='$lan',`lanid`='$lanid',`poster`='$poster',`posterid`='$posterid',`codejam`='$codejam',`web`='$web',`picasso`='$picasso',`picasso2`='$picasso2',`picassoid`='$picassoid',`video`='$video',`videoid`='$videoid',`selfie`='$selfie' WHERE rollno='$rollno'";*/
 				if ($conn->multi_query($sql) === TRUE) {
     				echo "Records updated successfully";
 				} else {
     				echo "Error: " . $sql . "<br>" . $conn->error;
 				}
 			}
+		
+				
 ?>
 </form>
 </body>
