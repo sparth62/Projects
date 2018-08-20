@@ -82,13 +82,13 @@
 			{
 				$i=1;
 				echo '<center><h1>Picasso</h1></center>';
-				$sql1 = "SELECT s.rollno ,s.name,e.picassoid FROM s_info as s,e_info as e WHERE s.rollno=e.rollno AND e.picasso='yes' order by e.picassoid";
+				$sql1 = "SELECT s.rollno ,s.name FROM s_info as s,e_info as e WHERE s.rollno=e.rollno AND e.picasso='yes' order by s.rollno";
 				$rec1=mysqli_query($conn,$sql1);
 				echo '<table style="border:3px solid black; border-collapse: collapse;" align="center">';
-					echo '<tr><th style="width:50px; border:1px solid black;"><b>Sr No</b></th><th style="width:150px; border:1px solid black;"><b>Roll No</b></th><th style="width:200px; border:1px solid black;"><b>Name</b></th><th style="width:100px; border:1px solid black;"><b>Team_id</b></th><th style="width:200px; border:1px solid black;"><b>Sign.</b></th></tr>';
+					echo '<tr><th style="width:50px; border:1px solid black;"><b>Sr No</b></th><th style="width:150px; border:1px solid black;"><b>Roll No</b></th><th style="width:200px; border:1px solid black;"><b>Name</b></th><th style="width:200px; border:1px solid black;"><b>Sign.</b></th></tr>';
 				while($row = mysqli_fetch_assoc($rec1))
 				{
-					echo '<tr><td style="border:1px solid black;">'.$i.'</td><td style="border:1px solid black;">'.$row['rollno'].'</td><td style="border:1px solid black;">'.$row['name'].'</td><td style="border:1px solid black;">'.$row['picassoid'].'</td><td style="border:1px solid black;"></td></tr>';
+					echo '<tr><td style="border:1px solid black;">'.$i.'</td><td style="border:1px solid black;">'.$row['rollno'].'</td><td style="border:1px solid black;">'.$row['name'].'</td><td style="border:1px solid black;"></td></tr>';
 					$i=$i+1;
 				}	
 				echo '</table>';

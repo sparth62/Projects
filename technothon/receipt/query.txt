@@ -1,2 +1,2 @@
 for fetch data for receipt:
-SELECT s.rollno,s.name,s.branch,s.sem,e.lan,e.lanid,e.poster,e.posterid,e.codejam,e.web,e.picasso,e.picassoid,e.video,e.videoid,e.selfie from s_info s,e_info e WHERE s.rollno=e.rollno;
+SELECT s.rollno,s.name,s.branch,s.sem,e.lan,e.lanid,e.poster,e.posterid,e.codejam,e.web,e.picasso,e.picassoid,e.video,e.videoid,e.selfie from s_info s,e_info e WHERE s.rollno=e.rollno AND date=20;

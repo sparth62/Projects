@@ -156,8 +156,8 @@
 							echo '>Laptop';
 							echo '<input type="radio" name="picasso2" value="pc"';if ('pc' == $result['picasso2']) echo ' checked';
 							echo '>PC';
-							echo '&nbsp;&nbsp;<input type="text" name="picassoid" value="';if ('yes' == $result['picasso']){echo $result['picassoid'];} else {echo 'pic';}
-							echo '">';
+							/*echo '&nbsp;&nbsp;<input type="text" name="picassoid" value="';if ('yes' == $result['picasso']){echo $result['picassoid'];} else {echo 'pic';}
+							echo '">';*/
 						echo '</td>';
 
 						echo '<td>One Minute Video</td>';
@@ -232,10 +232,11 @@
 				$web=$_POST['web'];
 				$picasso=$_POST['picasso'];
 				$picasso2=$_POST['picasso2'];
-				$picassoid=$_POST['picassoid'];
+				//$picassoid=$_POST['picassoid'];
 				$video=$_POST['video'];
 				$videoid=$_POST['videoid'];
 				$selfie=$_POST['selfie'];
+				$date=20;
 
 				$sql0 ="SELECT COUNT(*) FROM e_info WHERE rollno='$rollno';";
 					$rec1=mysqli_query($conn,$sql0);
@@ -243,11 +244,11 @@
 					$count = $row[0];
 				if($count==0)
 				{
-					$sql="INSERT INTO `e_info`(`rollno`, `lan`, `lanid`, `poster`, `posterid`, `codejam`, `web`, `picasso`, `picasso2`, `picassoid`, `video`, `videoid`, `selfie`) VALUES ('$rollno','no','lg','no','pp','no','no','no','laptop','pic','no','v','no');";	
+					$sql="INSERT INTO `e_info`(`rollno`,`date`,`lan`, `lanid`, `poster`, `posterid`, `codejam`, `web`, `picasso`, `picasso2`, `video`, `videoid`, `selfie`) VALUES ('$rollno',$date,'no','lg','no','pp','no','no','no','laptop','no','v','no');";	
 				}
 				else
 				{
-					$sql="";
+					$sql="UPDATE `e_info` SET `date`=$date WHERE rollno='$rollno';";
 				}
 
 				/*$sql="UPDATE `s_info` SET `rollno`='$rollno',`name`='$name',`branch`='$branch',`sem`='$sem',`email`='$email',`contact`='$contact' WHERE rollno='$rollno';";*/
@@ -288,7 +289,7 @@
 
 				if($picasso=='yes')
 				{
-					$sql1 ="SELECT COUNT(*) FROM e_info WHERE picassoid='$picassoid';";
+					/*$sql1 ="SELECT COUNT(*) FROM e_info WHERE picassoid='$picassoid';";
 					$rec1=mysqli_query($conn,$sql1);
 					$row = mysqli_fetch_row($rec1);
 					$piccount = $row[0];
@@ -298,9 +299,9 @@
     					echo "<script type='text/javascript'>alert('Picasso team already have 2 participents');</script>";
 					}
 					else
-					{
-						$sql .="UPDATE `e_info` SET `picasso`='$picasso',`picassoid`='$picassoid',`picasso2`='$picasso2' WHERE rollno='$rollno';";
-					}
+					{*/
+						$sql .="UPDATE `e_info` SET `picasso`='$picasso',`picasso2`='$picasso2' WHERE rollno='$rollno';";
+					//}
 				}
 
 				if($video=='yes')
