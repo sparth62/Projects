@@ -251,7 +251,7 @@
 					$sql="UPDATE `e_info` SET `date`=$date WHERE rollno='$rollno';";
 				}
 
-				/*$sql="UPDATE `s_info` SET `rollno`='$rollno',`name`='$name',`branch`='$branch',`sem`='$sem',`email`='$email',`contact`='$contact' WHERE rollno='$rollno';";*/
+				$sql .="UPDATE `s_info` SET `rollno`='$rollno',`name`='$name',`branch`='$branch',`sem`='$sem',`email`='$email',`contact`='$contact' WHERE rollno='$rollno';";
 
 				if($lan=='yes')
 				{

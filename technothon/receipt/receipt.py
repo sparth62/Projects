@@ -64,21 +64,18 @@ with open('e_info.csv', 'r') as csvfile:
 		pic=str(pic)
 		pic=pic[2:-2]
 		if(pic=='yes'):
-			id_={row[11]}
-			id_=str(id_)
-			id_=id_[2:-2]
-			pic="pic("+id_+"), "
+			pic="pic, "
 			event=event+pic
-		video={row[12]}
+		video={row[11]}
 		video=str(video)
 		video=video[2:-2]
 		if(video=='yes'):
-			id_={row[13]}
+			id_={row[12]}
 			id_=str(id_)
 			id_=id_[2:-2]
 			video="video("+id_+"), "
 			event=event+video
-		selfie={row[14]}
+		selfie={row[13]}
 		selfie=str(selfie)
 		selfie=selfie[2:-2]
 		if(selfie=='yes'):

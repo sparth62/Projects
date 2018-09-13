@@ -49,7 +49,7 @@
 	<h1>Welcome to Technothon!!!</h1>
 	<h2>Information Technology</h2><hr class="type_1">
 
-	<a href="form_final.php"><input type="button" name="registration" value="Registration Form"></a>
+	<a href="form_final2.php"><input type="button" name="registration" value="Registration Form"></a>
 	<a href="getinfo/info.php"><input type="button" name="info" value="Info Collector Form"></a>
 	<a href="attendance/attendance_sheet.php"><input type="button" name="attendance" value="Attendance Sheet Generator"></a>
 	<a href="search_receipt/search_receipt.php"><input type="button" name="search_receipt" value="Search Receipt"></a>
