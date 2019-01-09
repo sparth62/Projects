@@ -1,0 +1,63 @@
+#icon
+{
+	text-align: right;
+	margin-top: 20px;
+	margin-right: 10px;
+}
+#icon a
+{
+	font-family:sans-serif;
+	text-decoration: none;
+	vertical-align: middle;
+	padding: 8px;
+	font-size: 13px;
+	color: black;
+}
+#icon a img
+{
+	vertical-align: middle;	
+}
+#main_logo
+{
+	margin-bottom: 25px;
+}
+#search
+{
+	width: 580px;
+	height: 36px;
+	border-right: none;
+	font-family: "Arial";
+	font-size: 14px;
+	padding-left: 15px;
+	box-shadow:red	;
+}
+#combo
+{
+	border:1px solid grey;
+	width:605px;
+	height:36px;
+}
+button
+{
+	width:125.75px;
+	height: 36px;
+	border: none;
+	background-color: #e6e6ff;
+}
+.btn:hover
+{
+	border: 1px solid  #b3cccc;
+}
+#links ,#links a
+{
+	font-family:"sans-serif";
+	text-decoration: none;
+	vertical-align: middle;
+	
+	font-size: 14px;
+}
+#links a
+{
+	padding: 5px;
+	color: blue	;
+}	
